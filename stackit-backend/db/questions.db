@@ -1,0 +1,21 @@
+{
+  "text": "What is js?",
+  "level": "easy",
+  "poll": "Is it server-side?",
+  "username": "yaksh",
+  "createdAt": "2025-07-12T..."
+}
+{
+  "text": "What is Node.js?",
+  "level": "easy",
+  "poll": "Is it wrong side?",
+  "username": "smit",
+  "createdAt": "2025-07-12T..."
+}
+{
+  "text": "What is react.js?",
+  "level": "easy",
+  "poll": "Is it wrong side?",
+  "username": "yash",
+  "createdAt": "2025-07-12T..."
+}

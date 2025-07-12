@@ -1,14 +1,227 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>StackIt | Q&A Forum</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      width: 100%;
+      font-family: 'Poppins', sans-serif;
+      overflow: hidden;
+    }
+
+    body {
+      background: url('istockphoto-1017160930-612x612.jpg') no-repeat center center fixed;
+      background-size: cover;
+      position: relative;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: -240px;
+      width: 220px;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.9);
+      padding-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      z-index: 1001;
+      transition: left 0.3s ease;
+    }
+
+    .sidebar.open {
+      left: 0;
+    }
+
+    .sidebar h2 {
+      font-size: 1.5rem;
+      text-align: center;
+      margin-bottom: 2rem;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .sidebar a {
+      text-decoration: none;
+      color: #ccc;
+      padding: 1rem 2rem;
+      transition: 0.3s;
+      font-size: 1rem;
+    }
+
+    .sidebar a:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      color: #fff;
+    }
+
+    /* Toggle Button */
+    .menu-toggle {
+      position: fixed;
+      top: 1.5rem;
+      left: 1.5rem;
+      z-index: 1100;
+      background: rgba(0, 0, 0, 0.6);
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      padding: 0.5rem 0.8rem;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    /* Profile DP */
+    .profile-dp {
+      position: fixed;
+      top: 1.5rem;
+      right: 1.5rem;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid #fff;
+      z-index: 1100;
+    }
+
+    .profile-dp img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Main Content Overlay */
+    .overlay {
+      position: relative;
+      height: 100vh;
+      width: 100vw;
+      background-color: rgba(0, 0, 0, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding-left: 100px;
+      padding-right: 100px;
+      z-index: 1;
+      transition: margin-left 0.3s ease;
+    }
+
+    .sidebar.open ~ .overlay {
+      margin-left: 220px;
+    }
+
+    .hero-section {
+      max-width: 800px;
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 8rem;
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+      color: #ffffff;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+    }
+
+    .hero-subtitle {
+      font-size: 1.6rem;
+      font-weight: 400;
+      margin-bottom: 2.5rem;
+      color: #f0f0f0;
+    }
+
+    .cta-button {
+      padding: 1rem 2.5rem;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: white;
+      background-color: #8e2de2;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .cta-button:hover {
+      background-color: #5f00c3;
+    }
+
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 4.5rem;
+      }
+
+      .hero-subtitle {
+        font-size: 1.2rem;
+      }
+
+      .cta-button {
+        font-size: 1rem;
+      }
+
+      .overlay {
+        padding: 60px 20px;
+      }
+
+      .profile-dp {
+        width: 40px;
+        height: 40px;
+        right: 0.8rem;
+      }
+
+      .menu-toggle {
+        left: 0.8rem;
+      }
+    }
+  </style>
 </head>
 <body>
-    
 
+  <!-- Toggle Button -->
+  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
+  <!-- Profile Photo -->
+  <div class="profile-dp">
+    <img src="https://i.pravatar.cc/100" alt="User Profile" />
+  </div>
+
+  <!-- Sidebar Menu -->
+  <nav class="sidebar" id="sidebar">
+    <h2>Menu</h2>
+    <a href="p1.html">Dashboard</a>
+    <a href="about.html">About</a>
     
-    
+    <a href="contact.html">Contact Us</a>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="overlay" id="mainOverlay">
+    <div class="hero-section">
+      <h1 class="hero-title">STACKIT</h1>
+      <p class="hero-subtitle">A Minimal Q&A Forum Platform – A Place to Be Wise</p>
+      <a href="p2.html"><button class="cta-button">Let's Learn</button></a>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    function toggleMenu() {
+      const sidebar = document.getElementById("sidebar");
+      sidebar.classList.toggle("open");
+    }
+  </script>
+
 </body>
 </html>

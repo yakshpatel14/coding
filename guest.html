@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>StackIt | Ask & Chat</title>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      height: 100%;
+      font-family: 'Rubik', sans-serif;
+      background: #fff;
+      color: #000;
+      display: flex;
+      flex-direction: column;
+    }
+    body > * {
+      flex-shrink: 0;
+    }
+    header {
+      font-size: 2.5rem;
+      font-weight: bold;
+      text-align: center;
+      color: #000;
+      position: relative;
+      padding: 30px 0 20px;
+      background-color: #f1f1f1;
+      border-bottom: 1px solid #ccc;
+    }
+    .top-bar {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .top-bar .btn-home, .btn-login {
+      background: #000;
+      padding: 10px 20px;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .top-bar .btn-home:hover, .btn-login:hover {
+      background: #333;
+    }
+    .top-bar .user-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: url('https://i.pravatar.cc/40') no-repeat center/cover;
+      border: 2px solid #000;
+      cursor: pointer;
+    }
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 30px;
+      padding-top: 0;
+    }
+    .chat-box {
+      background: #f9f9f9;
+      border-radius: 15px;
+      padding: 30px;
+      margin-bottom: 30px;
+      border: 3px solid #000;
+      flex: 1;
+      overflow-y: auto;
+    }
+    .sample-question {
+      margin-top: 20px;
+      padding: 20px;
+      border: 2px solid #000;
+      border-radius: 10px;
+      background-color: #fff;
+    }
+    .sample-question h3 {
+      color: #000;
+      margin-bottom: 10px;
+    }
+    .sample-question p {
+      margin-bottom: 5px;
+      color: #333;
+    }
+    .sample-question .answer {
+      background-color: #000;
+      color: white;
+      padding: 10px;
+      border-radius: 8px;
+      margin-top: 10px;
+      border: 1px solid #333;
+    }
+    .whatsapp-chat {
+      background: #f1f1f1;
+      border-radius: 15px;
+      padding: 20px;
+      margin-bottom: 30px;
+      border: 3px solid #000;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+    .whatsapp-input input {
+      flex: 1;
+      padding: 10px;
+      border-radius: 20px;
+      border: 1px solid #ccc;
+      background-color: #fff;
+      color: #000;
+    }
+    .whatsapp-message {
+      padding: 10px 15px;
+      border-radius: 20px;
+      margin: 5px 0;
+      max-width: 80%;
+      border: 2px solid #000;
+    }
+    .whatsapp-message.self {
+      background: #000;
+      color: white;
+      align-self: flex-end;
+    }
+    .whatsapp-message.other {
+      background: #eee;
+      color: #000;
+      align-self: flex-start;
+    }
+    footer {
+      text-align: center;
+      color: #444;
+      padding: 20px;
+      border-top: 1px solid #ccc;
+      font-size: 0.9rem;
+      margin-top: auto;
+      background-color: #f1f1f1;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    WELCOME TO STACKIT
+    <div class="top-bar">
+      <button class="btn-home" onclick="location.href='p1.html'">Home</button>
+      <button class="btn-login" onclick="location.href='login.html'">Login to Ask</button>
+      <div class="user-icon" title="User Profile"></div>
+    </div>
+  </header>
+  <main>
+    <div style="text-align:center; margin-bottom: 20px; font-size: 1.1rem; color: #000;">
+      To ask a question, please <a href="login.html" style="color: #000; text-decoration: underline;">Login</a> or <a href="register.html" style="color: #000; text-decoration: underline;">Sign Up</a>.
+    </div>
+
+<div class="sample-question">
+  <h3>User1: What is HTML?</h3>
+  <div class="answer">A: HTML stands for HyperText Markup Language. It is used to structure content on the web.</div>
+</div>
+<div class="sample-question">
+  <h3>User2: What does CSS do?</h3>
+  <div class="answer">A: CSS (Cascading Style Sheets) is used to style and layout web pages.</div>
+</div>
+<div class="sample-question">
+  <h3>User3: What is JavaScript?</h3>
+  <div class="answer">A: JavaScript is a scripting language that allows you to implement complex features on web pages.</div>
+</div>
+<div class="sample-question">
+  <h3>User4: What is a function in programming?</h3>
+  <div class="answer">A: A function is a block of code designed to perform a specific task when called.</div>
+</div>
+<div class="sample-question">
+  <h3>User5: What is a variable?</h3>
+  <div class="answer">A: A variable is a container for storing data values.</div>
+</div>
+<div class="sample-question">
+  <h3>User6: What is an API?</h3>
+  <div class="answer">A: API stands for Application Programming Interface. It allows software components to communicate.</div>
+</div>
+<div class="sample-question">
+  <h3>User7: What is React?</h3>
+  <div class="answer">A: React is a JavaScript library for building user interfaces, developed by Facebook.</div>
+</div>
+<div class="sample-question">
+  <h3>User8: What is Node.js?</h3>
+  <div class="answer">A: Node.js is a runtime environment that allows JavaScript to be run on the server side.</div>
+</div>
+<div class="sample-question">
+  <h3>User9: What is a database?</h3>
+  <div class="answer">A: A database is an organized collection of data that can be easily accessed, managed, and updated.</div>
+</div>
+<div class="sample-question">
+  <h3>User10: What is Git?</h3>
+  <div class="answer">A: Git is a distributed version control system that allows developers to track changes in source code.</div>
+</div>

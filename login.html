@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>StackIt | Login/Register</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
+  <style>
+    /* Full CSS skipped for brevity */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      background: linear-gradient(135deg, #f0f4f8, #e3f2fd);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      width: 850px;
+      height: 520px;
+      border-radius: 25px;
+      background: #ffffff;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      display: flex;
+      position: relative;
+    }
+
+    .form-container {
+      width: 200%;
+      display: flex;
+      transition: transform 0.6s ease-in-out;
+    }
+
+    .form-panel {
+      width: 50%;
+      padding: 60px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      transition: all 0.4s ease;
+    }
+
+    .form-panel.login {
+      background-color: #3a3939; /* Light black */
+      color: white;
+    }
+
+    .form-panel.register {
+      background-color: #f5f5f5; /* Light grey/white */
+      color: #333;
+    }
+
+    .form-panel h2 {
+      margin-bottom: 30px;
+      font-size: 32px;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .input-field {
+      position: relative;
+      width: 100%;
+      margin-bottom: 30px;
+    }
+
+    .input-field input {
+      width: 100%;
+      padding: 14px 12px;
+      border: none;
+      border-radius: 10px;
+      background: #ffffff;
+      color: #000000;
+      font-size: 16px;
+      border: 1px solid #ccc;
+    }
+
+    .input-field input:focus {
+      outline: 2px solid #000000;
+    }
+
+    .input-field label {
+      position: absolute;
+      top: 50%;
+      left: 14px;
+      transform: translateY(-50%);
+      color: #555;
+      font-size: 16px;
+      pointer-events: none;
+      transition: 0.3s ease;
+    }
+
+    .input-field input:focus + label,
+    .input-field input:not(:placeholder-shown) + label {
+      top: -10px;
+      font-size: 12px;
+      color: #4d9eff;
+      background: #ffffff;
+      padding: 0 6px;
+      border-radius: 4px;
+    }
+
+    .form-panel.login .input-field label {
+      background: #ffffff;
+      color: #555;
+    }
+
+    .btn-wrapper {
+      display: flex;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    .btn {
+      padding: 14px 40px;
+      border: none;
+      border-radius: 30px;
+      background-color: #cdeaff;
+      color: #000;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 600;
+      transition: background 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #a3d9ff;
+    }
+
+    .switch-btn, .switch-btn1 {
+      margin: 20px auto 0;
+      background: transparent;
+      border: 2px solid #7f8fa2;
+      padding: 10px 25px;
+      border-radius: 25px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: block;
+    }
+
+    .switch-btn {
+      color: #574f4f;
+    }
+
+    .switch-btn1 {
+      color: #ffffff;
+      border-color: #ffffff;
+    }
+
+    .switch-btn:hover {
+      background-color: #20416b;
+      color: white;
+    }
+
+    .switch-btn1:hover {
+      background-color: #ffffff;
+      color: #3a3939;
+    }
+
+    .container.active .form-container {
+      transform: translateX(-50%);
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        width: 95%;
+        height: auto;
+        flex-direction: column;
+      }
+
+      .form-container {
+        flex-direction: column;
+        width: 100%;
+        transform: translateX(0%) !important;
+      }
+
+      .form-panel {
+        width: 100%;
+        padding: 40px 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container" id="container">
+  <div class="form-container">
+    <!-- Login -->
+    <div class="form-panel login">
+      <h2>Welcome Back</h2>
+      <div class="input-field">
+        <input type="text" id="loginUser" placeholder=" " required>
+        <label for="loginUser">Username</label>
+      </div>
+      <div class="input-field">
+        <input type="password" id="loginPass" placeholder=" " required>
+        <label for="loginPass">Password</label>
+      </div>
+      <div class="btn-wrapper">
+        <a href="p3.html"><button class="btn" onclick="loginUser()">Login</button></a>
+      </div>
+      <button class="switch-btn1" id="switchToRegister">Create Account</button>
+    </div>
+
+    <!-- Register -->
+    <div class="form-panel register">
+      <h2>Create Account</h2>
+      <div class="input-field">
+        <input type="text" id="regUser" placeholder=" " required>
+        <label for="regUser">Username</label>
+      </div>
+      <div class="input-field">
+        <input type="email" id="regEmail" placeholder=" " required>
+        <label for="regEmail">Email</label>
+      </div>
+      <div class="input-field">
+        <input type="password" id="regPass" placeholder=" " required>
+        <label for="regPass">Password</label>
+      </div>
+      <div class="btn-wrapper">
+        <a href="p3.html"><button class="btn" onclick="registerUser()">Register</button></a>
+      </div>
+      <button class="switch-btn" id="switchToLogin">Login Instead</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const container = document.getElementById('container');
+  const switchToRegister = document.getElementById('switchToRegister');
+  const switchToLogin = document.getElementById('switchToLogin');
+
+  switchToRegister.addEventListener('click', () => {
+    container.classList.add('active');
+  });
+
+  switchToLogin.addEventListener('click', () => {
+    container.classList.remove('active');
+  });
+
+  // LOGIN FUNCTION
+  async function loginUser() {
+    const username = document.getElementById('loginUser').value;
+    const password = document.getElementById('loginPass').value;
+
+    const response = await fetch('/api/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password })
+    });
+
+    const data = await response.json();
+    if (response.ok) {
+      alert('Login successful!');
+      localStorage.setItem('username', username);
+      window.location.href = 'p3.html';
+    } else {
+      alert(data.error || 'Login failed');
+    }
+  }
+
+  // REGISTER FUNCTION
+  async function registerUser() {
+    const username = document.getElementById('regUser').value;
+    const email = document.getElementById('regEmail').value;
+    const password = document.getElementById('regPass').value;
+
+    const response = await fetch('/api/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, email, password })
+    });
+
+    const data = await response.json();
+    if (response.ok) {
+      alert('Registration successful! You can now log in.');
+      container.classList.remove('active');
+    } else {
+      alert(data.error || 'Registration failed');
+    }
+  }
+</script>
+
+</body>
+</html>

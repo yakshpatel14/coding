@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>StackIt | Choose Mode</title>
+
+  <!-- Google Fonts and Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600;800&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      width: 100%;
+      font-family: 'Rubik', sans-serif;
+      background: linear-gradient(270deg, #0f0c29, #302b63, #24243e);
+      background-size: 600% 600%;
+      animation: animatedDarkBlue 15s ease infinite;
+      overflow: hidden;
+      position: relative;
+      color: #ffffff;
+    }
+
+    @keyframes animatedDarkBlue {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .floating-symbol {
+      position: absolute;
+      font-size: 16rem;
+      font-weight: 900;
+      color: white;
+      opacity: 0.08;
+      animation: spinFast 8s linear infinite;
+      pointer-events: none;
+      user-select: none;
+      text-shadow: 3px 3px 12px rgba(0, 0, 0, 0.8);
+    }
+
+    @keyframes spinFast {
+      0% { transform: rotate(0deg) translateY(0); }
+      50% { transform: rotate(180deg) translateY(-40px); }
+      100% { transform: rotate(360deg) translateY(0); }
+    }
+
+    .floating-symbol:nth-child(1) { top: 5%; left: 5%; animation-delay: 0s; }
+    .floating-symbol:nth-child(2) { top: 15%; left: 25%; animation-delay: 1s; }
+    .floating-symbol:nth-child(3) { top: 30%; left: 70%; animation-delay: 2s; }
+    .floating-symbol:nth-child(4) { top: 50%; left: 10%; animation-delay: 3s; }
+    .floating-symbol:nth-child(5) { top: 60%; left: 50%; animation-delay: 4s; }
+    .floating-symbol:nth-child(6) { top: 70%; left: 80%; animation-delay: 5s; }
+    .floating-symbol:nth-child(7) { top: 80%; left: 20%; animation-delay: 6s; }
+    .floating-symbol:nth-child(8) { top: 40%; left: 85%; animation-delay: 7s; }
+
+    .container {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .title {
+      font-size: 4.2rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      text-shadow: 5px 5px 20px rgba(0, 0, 0, 0.9);
+      margin-top: 6rem;
+      margin-bottom: 3rem;
+    }
+
+    .center-content {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .button-row {
+      display: flex;
+      gap: 4rem;
+      justify-content: center;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+
+    .option {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 280px;
+    }
+
+    .info-text {
+      color: #f1f1f1;
+      font-weight: 500;
+      line-height: 1.6;
+      font-size: 1rem;
+      min-height: 60px;
+      text-align: center;
+      margin-bottom: 1.5rem;
+      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .circle-button {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      border: 5px solid #ffffff;
+      background: rgba(255,255,255,0.12);
+      backdrop-filter: blur(10px);
+      color: #ffffff;
+      font-size: 1.1rem;
+      font-weight: 600;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+
+    .circle-button:hover {
+      transform: scale(1.08);
+      background: rgba(255,255,255,0.25);
+    }
+
+    .circle-button i {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .footer {
+      position: absolute;
+      bottom: 1rem;
+      text-align: center;
+      width: 100%;
+      color: #cccccc;
+      font-size: 0.9rem;
+      z-index: 2;
+    }
+
+    @media screen and (max-width: 768px) {
+      .circle-button {
+        width: 130px;
+        height: 130px;
+        font-size: 0.9rem;
+      }
+
+      .circle-button i {
+        font-size: 1.5rem;
+      }
+
+      .button-row {
+        gap: 2rem;
+      }
+
+      .title {
+        font-size: 2.5rem;
+        margin-top: 4rem;
+      }
+
+      .info-text {
+        font-size: 0.95rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background Animated Q&A -->
+  <span class="floating-symbol">Q</span>
+  <span class="floating-symbol">A</span>
+  <span class="floating-symbol">Q</span>
+  <span class="floating-symbol">A</span>
+  <span class="floating-symbol">Q</span>
+  <span class="floating-symbol">A</span>
+  <span class="floating-symbol">Q</span>
+  <span class="floating-symbol">A</span>
+
+  <!-- Page Content -->
+  <div class="container">
+    <div class="title">WELCOME TO STACKIT</div>
+
+    <div class="center-content">
+      <div class="button-row">
+        <div class="option">
+          <div class="info-text">
+            Use Guest mode to explore the site. You can view Q&A but not post or answer.
+          </div>
+          <button class="circle-button" onclick="window.location.href='/guest.html'">
+            <i class="fas fa-eye"></i>
+            Guest
+          </button>
+        </div>
+
+        <div class="option">
+          <div class="info-text">
+            Sign up or login to post questions, answer others, and join the community.
+          </div>
+          <button class="circle-button" onclick="window.location.href='/login.html'">
+            <i class="fas fa-user-circle"></i>
+            Login / Signup
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">© 2025 StackIt. All Rights Reserved.</div>
+  </div>
+
+</body>
+</html>

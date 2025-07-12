@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>StackIt | Ask & Chat</title>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Rubik', sans-serif;
+      background: linear-gradient(to bottom right, #0f0f0f, #1a1a1a);
+      color: #fff;
+      padding: 30px;
+      padding-top: 100px;
+    }
+
+    header {
+      font-size: 2.5rem;
+      font-weight: bold;
+      margin-bottom: 30px;
+      text-align: center;
+      color: #ffffff;
+      position: relative;
+    }
+
+    /* Top-right controls */
+    .top-bar {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .top-bar .btn-home {
+      background: #3385ff;
+      padding: 10px 20px;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .top-bar .btn-home:hover {
+      background: #1a73e8;
+    }
+
+    .top-bar .user-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: url('https://i.pravatar.cc/40') no-repeat center/cover;
+      border: 2px solid #3385ff;
+      cursor: pointer;
+    }
+
+    .button-bar {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      border: none;
+      background: #0056b3;
+      color: white;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: 0.3s;
+      margin: 5px;
+    }
+
+    .btn:hover {
+      background: #003d80;
+    }
+
+    .upload-panel {
+      display: none;
+      background: #1e1e1e;
+      padding: 30px;
+      border-radius: 15px;
+      margin-bottom: 30px;
+      border: 2px solid #3385ff;
+    }
+
+    .upload-panel label {
+      font-weight: 600;
+      display: block;
+      margin: 10px 0 5px;
+    }
+
+    textarea, select, input[type="file"], input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 10px;
+      border: none;
+      font-size: 1rem;
+      background-color: #2a2a2a;
+      color: #fff;
+    }
+
+    input[type="file"] {
+      background-color: #2a2a2a;
+      padding: 15px;
+      color: white;
+      border: 2px dashed #3385ff;
+      cursor: pointer;
+    }
+
+    input[type="file"]::file-selector-button {
+      background-color: #0056b3;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .poll-section {
+      background: #262626;
+      border: 2px dashed #3385ff;
+      padding: 15px;
+      border-radius: 12px;
+      margin-top: 15px;
+    }
+
+    .poll-section label {
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+      display: block;
+      color: #fff;
+    }
+
+    .poll-input {
+      font-size: 1rem;
+      padding: 10px;
+      border-radius: 10px;
+      border: none;
+      width: 100%;
+      background-color: #2a2a2a;
+      color: white;
+    }
+
+    .chat-box {
+      background: #1a1a1a;
+      padding: 20px;
+      border-radius: 15px;
+      max-height: 50vh;
+      overflow-y: auto;
+      box-shadow: inset 0 0 10px #000;
+      margin-bottom: 30px;
+      border: 3px solid #3385ff;
+    }
+
+    .message {
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      position: relative;
+      max-width: 75%;
+      border: 2px solid #3385ff;
+    }
+
+    .message.other {
+      background: #2a2a2a;
+      align-self: flex-start;
+    }
+
+    .message.self {
+      background: #0056b3;
+      align-self: flex-end;
+      margin-left: auto;
+    }
+
+    .question-label {
+      font-size: 0.8rem;
+      background: #007bff;
+      color: white;
+      padding: 3px 8px;
+      border-radius: 12px;
+      margin-bottom: 5px;
+      display: inline-block;
+    }
+
+    .question-image {
+      margin-top: 10px;
+      max-width: 100%;
+      border: 3px solid white;
+      border-radius: 10px;
+    }
+
+    .view-answers {
+      margin-top: 10px;
+      color: #ffffff;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .answers-container {
+      display: none;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .answer-bubble {
+      background: #264d73;
+      padding: 10px 15px;
+      border-radius: 20px;
+      align-self: flex-start;
+      border: 2px solid #3385ff;
+      max-width: 90%;
+    }
+
+    .answer-panel {
+      margin-top: 10px;
+      display: none;
+    }
+
+    .whatsapp-chat {
+      background: #1e1e1e;
+      border-radius: 15px;
+      padding: 20px;
+      height: 300px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 3px solid #3385ff;
+    }
+
+    .whatsapp-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 10px;
+    }
+
+    .whatsapp-message {
+      padding: 10px 15px;
+      border-radius: 20px;
+      margin: 5px 0;
+      width: fit-content;
+      max-width: 80%;
+      border: 2px solid #3385ff;
+    }
+
+    .whatsapp-message.self {
+      background: #0056b3;
+      align-self: flex-end;
+    }
+
+    .whatsapp-message.other {
+      background: #2a2a2a;
+      align-self: flex-start;
+    }
+
+    .whatsapp-input {
+      display: flex;
+      gap: 10px;
+      padding: 10px;
+      border-top: 1px solid #444;
+    }
+
+    .whatsapp-input input {
+      flex: 1;
+      padding: 10px;
+      border-radius: 20px;
+      border: none;
+      background-color: #2a2a2a;
+      color: white;
+    }
+
+    footer {
+      text-align: center;
+      color: #aaa;
+      margin-top: 60px;
+      padding: 20px;
+      border-top: 1px solid #333;
+      font-size: 0.9rem;
+    }
+
+  </style>
+</head>
+<body>
+
+  <header>
+    WELCOME TO STACKIT
+    <div class="top-bar">
+      <button class="btn-home" onclick="location.href='index.html'">Home</button>
+      <div class="user-icon" title="User Profile"></div>
+    </div>
+  </header>
+
+  <div class="button-bar">
+    <button class="btn" onclick="toggleUploadPanel()">Upload Question</button>
+  </div>
+
+  <div class="upload-panel" id="uploadPanel">
+    <label for="questionText">Enter Your Question:</label>
+    <textarea id="questionText" rows="3" placeholder="Type your question..."></textarea>
+
+    <label for="questionImage">Add Image:</label>
+    <input type="file" id="questionImage" accept="image/*">
+
+    <label for="questionLevel">Select Difficulty Level:</label>
+    <select id="questionLevel">
+      <option value="easy">Easy</option>
+      <option value="medium">Medium</option>
+      <option value="hard">Hard</option>
+    </select>
+
+    <div class="poll-section">
+      <label for="pollOption">Poll (Optional):</label>
+      <input type="text" id="pollOption" class="poll-input" placeholder="Enter poll question (optional)" />
+    </div>
+
+    <button class="btn" onclick="submitQuestion()">Post Question</button>
+  </div>
+
+  <div class="chat-box" id="chatBox"></div>
+
+  <div class="whatsapp-chat">
+    <div class="whatsapp-messages" id="whatsappMessages"></div>
+    <div class="whatsapp-input">
+      <input type="text" id="chatInput" placeholder="Type your message...">
+      <button class="btn" onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  <footer>
+    © 2025 StackIt. Built with ❤️ for collaborative learning.
+  </footer>
+
+  <script>
+    const uploadPanel = document.getElementById('uploadPanel');
+    const chatBox = document.getElementById('chatBox');
+    const whatsappMessages = document.getElementById('whatsappMessages');
+
+    function toggleUploadPanel() {
+      uploadPanel.style.display = uploadPanel.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function submitQuestion() {
+      const questionText = document.getElementById('questionText').value;
+      const questionImage = document.getElementById('questionImage').files[0];
+      const questionLevel = document.getElementById('questionLevel').value;
+      const poll = document.getElementById('pollOption').value;
+
+      if (!questionText && !questionImage) return alert("Please enter a question or upload an image.");
+
+      const questionDiv = document.createElement('div');
+      questionDiv.classList.add('message', 'self');
+      questionDiv.innerHTML = `
+        <div class="question-label">${questionLevel.toUpperCase()}</div>
+        <strong>Me:</strong> ${questionText}
+        ${questionImage ? `<img src="${URL.createObjectURL(questionImage)}" class="question-image">` : ''}
+        ${poll ? `<div><strong>Poll:</strong> ${poll}</div>` : ''}
+        <div class="view-answers" onclick="toggleAnswers(this)">View Answers (0)</div>
+        <div class="answers-container"></div>
+        <div class="answer-panel">
+          <input type="text" placeholder="Type your answer...">
+          <button class="btn" onclick="postAnswer(this)">Submit Answer</button>
+        </div>
+      `;
+      chatBox.appendChild(questionDiv);
+      uploadPanel.style.display = 'none';
+      document.getElementById('questionText').value = '';
+      document.getElementById('questionImage').value = '';
+      document.getElementById('pollOption').value = '';
+      document.getElementById('questionLevel').value = 'easy';
+    }
+
+    function toggleAnswers(btn) {
+      const container = btn.nextElementSibling;
+      const inputPanel = container.nextElementSibling;
+      container.style.display = container.style.display === 'flex' ? 'none' : 'flex';
+      inputPanel.style.display = inputPanel.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function postAnswer(btn) {
+      const input = btn.previousElementSibling;
+      if (input.value.trim() === '') return;
+      const answer = document.createElement('div');
+      answer.classList.add('answer-bubble');
+      answer.textContent = input.value;
+      const container = btn.parentElement.previousElementSibling;
+      container.appendChild(answer);
+      const countText = container.previousElementSibling;
+      const currentCount = container.children.length;
+      countText.textContent = `View Answers (${currentCount})`;
+      input.value = '';
+    }
+
+    function sendMessage() {
+      const input = document.getElementById('chatInput');
+      const text = input.value.trim();
+      if (!text) return;
+      const message = document.createElement('div');
+      message.classList.add('whatsapp-message', 'self');
+      message.textContent = text;
+      whatsappMessages.appendChild(message);
+      input.value = '';
+      whatsappMessages.scrollTop = whatsappMessages.scrollHeight;
+    }
+  </script>
+</body>
+</html>
